@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://inkgtbt33j6b"]
+
+[ext_resource type="Texture2D" uid="uid://m35nweaq3vmd" path="res://GameAssets/GUI/Vector/backpack.png" id="1_q6yl5"]
+
+[node name="InventoryButton" type="Button"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(0.887599, 0.880176)
+texture = ExtResource("1_q6yl5")

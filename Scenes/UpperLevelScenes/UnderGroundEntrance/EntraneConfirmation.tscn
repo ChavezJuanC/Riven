@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dr0hlgc3kgamk"]
+
+[node name="EntranceConfirmation" type="CanvasLayer"]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 832.0
+offset_top = 424.0
+offset_right = 1100.0
+offset_bottom = 540.0
+theme_override_font_sizes/font_size = 15
+text = "Are you sure you want to continue?
+You will not be able to loot more.
+
+                            Y/N ?"

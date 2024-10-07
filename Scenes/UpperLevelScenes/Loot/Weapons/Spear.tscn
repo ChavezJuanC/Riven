@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq7f4f2bgrf4p"]
+
+[ext_resource type="Texture2D" uid="uid://cpkk4dxtke0m" path="res://GameAssets/Weapons/Spear.png" id="1_mjtk5"]
+[ext_resource type="Script" path="res://Scenes/UpperLevelScenes/Loot/Weapons/Spear.gd" id="1_sdup5"]
+[ext_resource type="AudioStream" uid="uid://ja3vpa7p6nu2" path="res://GameAssets/Sounds/item_pickedup.wav" id="3_hdfn5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xb4x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_emu2f"]
+radius = 8.0
+height = 48.0
+
+[node name="Spear" type="Area2D" node_paths=PackedStringArray("item_collect_sound")]
+scale = Vector2(0.991342, 0.982214)
+script = ExtResource("1_sdup5")
+item_collect_sound = NodePath("item_collect_sound")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_0xb4x")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(3.17891e-07, 0)
+scale = Vector2(0.0208333, 0.0185989)
+texture = ExtResource("1_mjtk5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(32, 32)
+rotation = 0.785397
+shape = SubResource("CapsuleShape2D_emu2f")
+
+[node name="item_collect_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hdfn5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="finished" from="item_collect_sound" to="." method="_on_item_collect_sound_finished"]

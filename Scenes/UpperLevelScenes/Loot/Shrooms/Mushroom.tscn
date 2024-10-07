@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b00uu355cfgug"]
+
+[ext_resource type="Texture2D" uid="uid://bu3oiol5sptti" path="res://GameAssets/Loot/LootableShroom.png" id="1_ft14k"]
+[ext_resource type="Script" path="res://Scenes/UpperLevelScenes/Loot/Shrooms/MushroomHandler.gd" id="1_qj32u"]
+[ext_resource type="AudioStream" uid="uid://bujlv37s70cke" path="res://GameAssets/Sounds/shroom_collect.wav" id="3_s21so"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc60j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qb0lw"]
+
+[node name="Mushroom" type="Node2D" node_paths=PackedStringArray("mushroom_collect_sound")]
+script = ExtResource("1_qj32u")
+mushroom_collect_sound = NodePath("mushroom_collect_sound")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(1.99317, 2)
+texture = ExtResource("1_ft14k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(1.20943, 0.725928)
+shape = SubResource("CapsuleShape2D_mc60j")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(2.49513, 2.5)
+shape = SubResource("CircleShape2D_qb0lw")
+
+[node name="mushroom_collect_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s21so")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="finished" from="mushroom_collect_sound" to="." method="_on_mushroom_collect_sound_finished"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm60ixrtdlf0t"]
+
+[ext_resource type="Texture2D" uid="uid://1cngmkjicswn" path="res://GameAssets/Weapons/AK47.png" id="1_1luh3"]
+[ext_resource type="Script" path="res://Scenes/UpperLevelScenes/Loot/Weapons/AK47.gd" id="1_ibowr"]
+[ext_resource type="AudioStream" uid="uid://ja3vpa7p6nu2" path="res://GameAssets/Sounds/item_pickedup.wav" id="3_ap5x8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xo03c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4myb"]
+size = Vector2(50, 20)
+
+[node name="LootRange" type="Area2D" node_paths=PackedStringArray("item_collect_sound")]
+position = Vector2(0, -1)
+script = ExtResource("1_ibowr")
+item_collect_sound = NodePath("item_collect_sound")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_xo03c")
+
+[node name="AkSprite" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(0, -2.66667)
+scale = Vector2(0.333333, 0.333333)
+texture = ExtResource("1_1luh3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(31, 32)
+scale = Vector2(1, 1.00773)
+shape = SubResource("RectangleShape2D_d4myb")
+
+[node name="item_collect_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ap5x8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="finished" from="item_collect_sound" to="." method="_on_item_collect_sound_finished"]
